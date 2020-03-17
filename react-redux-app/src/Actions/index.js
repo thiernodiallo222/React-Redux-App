@@ -1,37 +1,34 @@
-export const FECTCHING_START = 'FECTCH_START';
-export const FECTCHING_SUCCESS = 'FECTCH_SUCCESS';
-export const FECTCHING_FAIL = 'FECTCH_FAIL';
+import axios from 'axios';
+export const FETCHING_START = 'FETCHING_START';
+export const FETCHING_SUCCESS = 'FETCHING_SUCCESS';
+export const FETCHING_FAILURE = 'FETCHING_FAILURE';
 
-export const initialSate = {
-    data: [],
-  error: '',
-  isFetching: false
-};
-
-export const getData = () => fire => {
+export const getData = () => dispatch => {
   // initially send the action FETCHING_QUOTE_START so that we
   // get our state updated to support a fetch
-  fire({ type: FETCHING_START });
+  dispatch({
+    type: FETCHING_START,
+    payload: true
+  });
 
   axios
-      .get(`https://swapi.co/api/people/`)
+      .get("https://api.github.com/users/thiernodiallo222/followers")
+    // .get('https://swapi.co/api/people/')
       
     .then(res => {
-      console.log("res", res);
+      console.log(res);
       // send the action FETCHING_QUOTE_SUCCESS and update state
       // to show the fetched data
-      fire({ type: FETCHING_SUCCESS, payload: res.data.results });
-    })
+      // dispatch({ type: FETCHING_SUCCESS, payload: res.data.results });
+     })
     .catch(err => {
-      console.log("err", err);
+      console.log('err', err);
       // send the action FETCHING_QUOTE_FAILURE and update state
       // to show the error message
-      fire({
-        type: FETCHING_FAIL,
-        payload: `${err.response.message} with response code ${
-          err.response.code
-        }`
-      });
+      dispatch({
+        type: FETCHING_FAILURE,
+        payload: 'ERROR TO FETCH DATA'
+        });
     });
 };
 

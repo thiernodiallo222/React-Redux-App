@@ -1,24 +1,27 @@
 import react from 'react';
-import { FECTCHING_START, FETCHING_SUCCESS, FETCHING_FAIL } from '../../Actions/index';
-import { initialState } from '../../Actions/index';
+import { FETCHING_START, FETCHING_SUCCESS, FETCHING_FAILURE } from '../../Actions/index';
 
+
+const initialState = {
+  data: [],
+  error: '',
+  isFetching: false
+};
 
 const reducer = (state = initialState, action) =>{
   switch (action.type) {
     case FETCHING_START:
       return {
         ...state,
-        isFetching: true,
-        error: ''
+        isFetching: action.payload,
       };
     case FETCHING_SUCCESS:
       return {
         ...state,
-        data: action.payload,
+        data: [ ...state.data, action.payload],
         isFetching: false,
-        error: ''
       };
-    case FETCHING_FAIL:
+    case FETCHING_FAILURE:
       return {
         ...state,
         error: action.payload

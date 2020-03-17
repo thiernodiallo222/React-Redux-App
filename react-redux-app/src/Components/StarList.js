@@ -2,37 +2,31 @@ import React from 'react';
 import StarCard from './StarCard';
 import { connect } from 'react-redux';
 import { getData } from '../Actions/index';
+import './Style.css';
 
- const StarList = (isFetching, data, error, getData) => {
+ const StarList = ({ isFetching, data, error, getData }) => {
   if (isFetching) {
-    return (
-      <>
-    <h3>Fetching Stars now ... </h3>
-    <button onClick={() => getData()}></button>
-      </>
-    )
-    
+    return <h3>Fetching Stars now ... </h3>; 
   }else if(error) {
     return <h3>{error}</h3>;
   } else {
-    return (
-    <>
-      {/* <button onClick={() => getData()}></button> */}
-      <div>
-        <h2>Stars: {data}</h2>
+    return <div>
+      
+      <button onClick={getData}> Get Data</button>
 
-  {data.map((item, index) =>
-    <StarCard id={index}
-        name={item.name}
-        height={item.height}
-        mass={item.mass}
-        gender={item.gender}
-        birth_year={item.birth_year}
-        homeworld={item.homeworld}
-        gender={item.gender} />)}
-    </div>
-    </>
-  )
+      {data.map((item, index) =>
+     
+        <div className="star-card">
+          <StarCard id={index}
+            name={item.name}
+            height={item.height}
+            mass={item.mass}
+            gender={item.gender}
+            birth_year={item.birth_year}
+            homeworld={item.homeworld} />
+          </div>)}
+        
+        </div>
   }
  }
 

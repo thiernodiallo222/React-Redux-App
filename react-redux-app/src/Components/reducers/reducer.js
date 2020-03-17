@@ -1,5 +1,5 @@
-import react from 'react';
-import { FETCHING_START, FETCHING_SUCCESS, FETCHING_FAILURE } from '../../Actions/index';
+// import react from 'react';
+import { FETCHING_START, FETCHING_SUCCESS, FETCHING_FAILURE } from '../../Actions';
 
 
 const initialState = {
@@ -8,7 +8,7 @@ const initialState = {
   isFetching: false
 };
 
-const reducer = (state = initialState, action) =>{
+export const reducer = (state = initialState, action) =>{
   switch (action.type) {
     case FETCHING_START:
       return {
@@ -18,7 +18,7 @@ const reducer = (state = initialState, action) =>{
     case FETCHING_SUCCESS:
       return {
         ...state,
-        data: [ ...state.data, action.payload],
+        data: action.payload,
         isFetching: false,
       };
     case FETCHING_FAILURE:
@@ -31,4 +31,3 @@ const reducer = (state = initialState, action) =>{
   }
 };
 
-export default reducer;

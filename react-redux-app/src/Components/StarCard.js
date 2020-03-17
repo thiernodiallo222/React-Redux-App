@@ -1,9 +1,11 @@
 import React from 'react'
+import './Style.css';
 
   const StarCard =(props) => {
-    return (
-        <div>
-       <h2> {props.name} </h2>
+      return  <div >
+
+          
+       <h3> Name: {props.name} </h3>
       
        <p>Height: {props.height} Feet </p>
 
@@ -15,10 +17,11 @@ import React from 'react'
 
        <p>Home world: {props.homeworld} </p>
             
-       <p>Films: {props.films} </p>
             
         </div>
-    )
+    
 }
+    
+     
 
 export default StarCard;
